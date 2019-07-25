@@ -7,11 +7,7 @@ interface TestPageProps {
     slug: string;
 }
 
-interface TestPageState {
-    mounted: boolean;
-}
-
-class Test extends React.Component<TestPageProps, TestPageState> {
+class Test extends React.Component<TestPageProps> {
 
     static async getInitialProps(context: NextPageContext): Promise<TestPageProps> {
         const slug = context.query.slug as string;
@@ -20,25 +16,11 @@ class Test extends React.Component<TestPageProps, TestPageState> {
         };
     }
 
-    constructor(props: TestPageProps) {
-        super(props);
-        this.state = {
-            mounted: false,
-        }
-    }
-
-    componentDidMount() {
-        this.setState({
-            mounted: true,
-        });
-    }
-
     render() {
         const { slug } = this.props;
-        const { mounted } = this.state;
         return (
             <>
-                {mounted && <iframe src={`/b?slug=${slug}`} />}
+                <iframe src={`/b?slug=${slug}`} />
                 <div>
                     We got slug {slug}
                 </div>
